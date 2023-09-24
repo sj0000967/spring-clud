@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.sahan.employeeservice.dto.EmployeeDTO;
 import com.sahan.employeeservice.entity.Employee;
+import com.sahan.employeeservice.exception.ResourceNotFoundException;
 import com.sahan.employeeservice.repository.EmployeeRepository;
 
 @Service
@@ -39,7 +40,7 @@ public class EmployeeService {
 
     public EmployeeDTO getEmployeebyId(Long employeeId) throws Exception {
 
-        Employee employee = employeeRepository.findById(employeeId).orElseThrow(() -> new Exception("Eployee not found"));
+        Employee employee = employeeRepository.findById(employeeId).orElseThrow(() -> new ResourceNotFoundException("Emloyee" ,"id", employeeId));
 
         return modelMapper.map(employee, EmployeeDTO.class);
 
